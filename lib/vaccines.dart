@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'api_config.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -30,10 +31,10 @@ void _fetchVaccineData() async {
       // Hide progress indicator
     });
 final response = await http.post(
-Uri.parse('https://elifesaver.online/donor/includes/fetch_vaccines.inc.php'),
-body: {
-'id': widget.userId.toString(),
-},
+  Uri.parse(ApiConfig.fetchVaccines),
+  body: {
+    'id': widget.userId.toString(),
+  },
 );
 setState(() {
       _isLoading = false; 

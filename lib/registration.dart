@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'patient_dashboard.dart';
 import 'package:http/http.dart' as http;
+import 'api_config.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -62,7 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
       String factor) async {
     try {
       final response = await http.post(
-        Uri.parse('https://elifesaver.online/includes/registerPatient.inc.php'),
+        Uri.parse(ApiConfig.registerPatient),
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -393,8 +394,8 @@ SizedBox(
       style: TextStyle(fontSize: 16),
     ),
     style: ElevatedButton.styleFrom(
-      primary: Colors.redAccent[400],
-      onPrimary: Colors.white,
+      backgroundColor: Colors.redAccent[400],
+      foregroundColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -462,8 +463,8 @@ Center(
                         style: TextStyle(fontSize: 16),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.redAccent[400],
-                        onPrimary: Colors.white,
+                        backgroundColor: Colors.redAccent[400],
+                        foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),

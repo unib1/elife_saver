@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'api_config.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -40,7 +41,7 @@ class _ResultPageState extends State<ResultPage> {
       final btsNumber = widget.btsNumber;
       
       // Check if btsNumber is null and provide a default value (an empty string)
-      final url = Uri.parse('https://elifesaver.online/includes/get_all_donor_results.inc.php?bts_number=${btsNumber ?? ""}');
+      final url = Uri.parse('${ApiConfig.getDonorResults}?bts_number=${btsNumber ?? ""}');
       
       final response = await http.get(
         url,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'api_config.dart';
 import 'dart:convert';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
  class PatientNotification extends StatefulWidget {
@@ -28,7 +29,7 @@ class _PatientNotificationState extends State<PatientNotification> {
       
     });
   try {
-    final url = Uri.parse('https://elifesaver.online/includes/get_all_blood_appeals_for_user.inc.php');
+    final url = Uri.parse(ApiConfig.getBloodAppeals);
     final response = await http.post(
       url,
       body: {

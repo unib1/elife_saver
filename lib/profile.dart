@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'api_config.dart';
 
 class ProfilePage extends StatefulWidget {
   final int userId;
@@ -98,7 +99,7 @@ class _ProfilePageState extends State<ProfilePage> {
     final updatedPassword =
         _passwordController.text.isNotEmpty ? _passwordController.text : '';
 
-    const apiUrl = 'https://elifesaver.online/donor/includes/update_donor.inc.php';
+    const apiUrl = ApiConfig.getProfileUpdate;
 
     try {
       final Map<String, String> updatedFields = {};

@@ -1,12 +1,12 @@
 buildscript {
-    ext.kotlin_version = '1.7.10'
+    ext.kotlin_version = '1.9.22'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath 'com.android.tools.build:gradle:8.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -22,8 +22,40 @@ rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
-subprojects {
-    project.evaluationDependsOn(':app')
+
+// Unified Compatibility Script for AGP 8+ and Older Plugins
+allprojects {
+    // 1. Universal Namespace and Basic Android Settings
+    project.afterEvaluate { prj ->
+        if (prj.hasProperty('android')) {
+            prj.android {
+                if (namespace == null) {
+                    def manifestFile = prj.file('src/main/AndroidManifest.xml')
+                    if (manifestFile.exists()) {
+                        def manifest = new XmlParser().parse(manifestFile)
+                        namespace = manifest.@package
+                    }
+                }
+                // Force Java 11 in the extension
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_11
+                    targetCompatibility JavaVersion.VERSION_11
+                }
+            }
+        }
+    }
+
+    // 2. Comprehensive Task Override (Ensures Java and Kotlin compiler settings match)
+    tasks.withType(JavaCompile).configureEach {
+        sourceCompatibility = "11"
+        targetCompatibility = "11"
+    }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
+    }
 }
 
 tasks.register("clean", Delete) {

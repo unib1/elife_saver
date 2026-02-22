@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'api_config.dart';
 import 'dart:convert';
 import 'dashboard.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -118,7 +119,7 @@ class _DonorAppealPageState extends State<DonorAppealPage> {
     });
     try {
       final response = await http.get(
-        Uri.parse('https://elifesaver.online/includes/get_all_heath_facilities.inc.php'),
+        Uri.parse(ApiConfig.getHealthFacilities),
       );
 setState(() {
       _isLoading = false;
@@ -412,7 +413,7 @@ setState(() {
   try {
     // Send the user's details to the server
     final response = await http.post(
-      Uri.parse('https://elifesaver.online/includes/create_blood_appeal.inc.php'),
+      Uri.parse(ApiConfig.createBloodAppeal),
       body: {
         'user_type': widget.userType,
         'patient_id': patientId.toString(),

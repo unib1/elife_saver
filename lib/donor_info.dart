@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dashboard.dart';
 import 'login.dart';
 import 'package:http/http.dart' as http;
+import 'api_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -96,7 +97,7 @@ class _DonorInfoPageState extends State<DonorInfoPage> {
       
     });
    final response = await http.post(
-    Uri.parse('https://elifesaver.online/includes/registerDonor.inc.php'),
+    Uri.parse(ApiConfig.registerDonor),
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
@@ -191,7 +192,7 @@ class _DonorInfoPageState extends State<DonorInfoPage> {
      try {
       
       // Check if btsNumber is null and provide a default value (an empty string)
-      final url = Uri.parse('https://elifesaver.online/includes/get_all_cities.inc.php');
+      final url = Uri.parse(ApiConfig.getCities);
       final response = await http.get(
         url,
         headers: {

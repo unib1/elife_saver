@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'patient_dashboard.dart';
 import 'package:http/http.dart' as http;
+import 'api_config.dart';
 import 'login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -43,7 +44,7 @@ class _PatientRegisterPageState extends State<PatientRegisterPage> {
     
     try {
       final response = await http.post(
-        Uri.parse('https://elifesaver.online/includes/registerPatient.inc.php'),
+        Uri.parse(ApiConfig.registerPatient),
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },

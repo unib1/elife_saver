@@ -5,6 +5,7 @@ import 'login.dart';
 import 'patient_notification.dart';
 import 'make_appeal.dart';
 import 'package:http/http.dart' as http;
+import 'api_config.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -35,7 +36,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
       
     });
   try {
-    final url = Uri.parse('https://elifesaver.online/includes/get_all_blood_appeals_for_user.inc.php');
+    final url = Uri.parse(ApiConfig.getBloodAppeals);
     final response = await http.post(
       url,
       body: {

@@ -8,12 +8,15 @@ import 'doctor_dashboard.dart';
 import 'patient_registeration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'api_config.dart';
 class LoginPage extends StatefulWidget {
-late String userName;
- late int userId;
- late String userType;
+  final String? userName;
+  final int? userId;
+  final String? userType;
+
+  LoginPage({this.userName, this.userId, this.userType});
+
   @override
-  
   _LoginPageState createState() => _LoginPageState();
 }
 
@@ -30,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
   });
 
   final response = await http.post(
-    Uri.parse('https://elifesaver.online/includes/login.inc.php'),
+    Uri.parse(ApiConfig.login),
     body: {
       'email': email,
       'password': password,

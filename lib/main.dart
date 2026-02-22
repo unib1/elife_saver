@@ -89,7 +89,7 @@ Future<void> checkLoginStatus() async {
     runApp(
       MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: My(),
+        home: LoginPage(),
       ),
     );
   }

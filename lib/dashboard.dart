@@ -8,6 +8,7 @@ import 'login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'donor_appeal.dart';
 import 'package:http/http.dart' as http;
+import 'api_config.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/services.dart';
@@ -86,7 +87,7 @@ String _nextDonationDate = '';
         Future<void> fetchCredits() async {
   try {
     // Make a GET request to the server
-    final response = await http.get(Uri.parse('https://elifesaver.online/donor/includes/get_credit.inc.php?bts_number=${widget.btsNumber}'));
+    final response = await http.get(Uri.parse('${ApiConfig.getCredit}?bts_number=${widget.btsNumber}'));
 
     if (response.statusCode == 200) {
   final body = json.decode(response.body);
@@ -113,7 +114,7 @@ throw Exception('Failed to fetch credits: $error');
   try {
     final id = widget.userId;
     final gender = widget.gender;
-    final url = Uri.parse('https://elifesaver.online/includes/get_donation_info.inc.php?id=${id ?? ""}&gender=${gender ?? ""}');
+    final url = Uri.parse('${ApiConfig.getDonationInfo}?id=${id ?? ""}&gender=${gender ?? ""}');
     
     final response = await http.get(
       url,
